@@ -5,7 +5,7 @@ This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i ha
  
 1, Install rails_tiny_mce plugin using
  
-script/plugin install git://github.com/funonrails/rails_tiny_mce.git
+script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
 script/generate rails_tiny_mce_migration
 rake db:migrate
