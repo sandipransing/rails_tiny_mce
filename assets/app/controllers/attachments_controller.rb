@@ -11,7 +11,7 @@ class AttachmentsController < ApplicationController
 
 
   def create
-    @attachment = "#{params[:media]}".classify.constantize.new(params[:media])
+    @attachment = "#{params[:media]}".classify.constantize.new(params[params[:media]])
     
     if @attachment.save
       GC.start
