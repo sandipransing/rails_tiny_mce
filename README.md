@@ -1,5 +1,5 @@
 # RailsTinyMCE : Rich Text Editor
------------
+
 TinyMCE is a javascript rich text editor. It is easy to integrate into blogs, cms, messages and mailers.
 
 Plugin uses jrails(jquery) and paperclip plugin for upload support.
