@@ -72,18 +72,18 @@ You may custom the config in tiny_mce_plus_config.rb.
  
 ## Attention Note:
 ---------------------
-* Do not put <p> </p> around the textarea.
-* If you use *old will_paginate plugin*, maybe change the url_for to url_option in remote_link_renderer.rb
+* Do not put *<p> </p>* around the textarea.
+* If you are using *old will_paginate plugin*, maybe change the url_for to url_option in remote_link_renderer.rb
  
 ## Example use:
-----------------------
+
 - Create CRUD for post
     ./script/generate scaffold post title:string text:description
  
 - Run Migrations
     rake db:migrate
  
-- Add following line to posts_controller.rb
+- Add following line to *posts_controller.rb*
     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
 - Open /views/posts/new.html.erb and /views/posts/edit.html.erb
@@ -93,9 +93,9 @@ to
     <%= f.text_area :description, :class => "mceEditor" %>
  
 ## Contributors
-----------------
+
 1. Sandip Ransing, Josh Software Private Limited
 
 thats, all
 
-any sugestions? **san2821 at gmail.com**, **sandip at joshsoftware.com** released under the MIT license
+any sugestions? **san2821 at gmail.com** or **sandip at joshsoftware.com** released under the MIT license
