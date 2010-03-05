@@ -1,4 +1,5 @@
-# RailsTinyMCE : Rich Text Editor
+# RailsTinyMCE
+## Rich Text Editor for ruby on rails
 
 TinyMCE is a javascript rich text editor. It is easy to integrate into blogs, cms, messages and mailers.
 
