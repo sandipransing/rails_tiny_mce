@@ -1,7 +1,6 @@
-# RailsTinyMCE
-## Rich Text Editor for ruby on rails
+# RailsTinyMCE - A Rich Text Editor for ruby on rails
 
-TinyMCE is a javascript rich text editor. It is easy to integrate into blogs, cms, messages and mailers.
+TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.
 
 Plugin uses jrails(jquery) and paperclip plugin for upload support.
 
