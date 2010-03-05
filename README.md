@@ -2,7 +2,7 @@
  
 This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i have modified and updated this plugin for my project, now this plugin works with jrails(jquery), paperclip plugin.
  
-1. Install rails_tiny_mce plugin using
+-Install rails_tiny_mce plugin using
  
     script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
@@ -10,11 +10,11 @@ This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i ha
     
     rake db:migrate
  
-2. Install jrails(jquery) plugin using
+-Install jrails(jquery) plugin using
 
     script/plugin install git://github.com/aaronchi/jrails.git
  
-3. Install dependent plugins(if you didn't):
+-Install dependent plugins(if you didnt):
  
     rake rails_tiny_mce:plugins
  
@@ -24,12 +24,12 @@ Above command will copy *paperclip, responds_to_parent, will_paginate* to your p
 **responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
 **will_paginate** git://github.com/mislav/will_paginate.git
  
-4. In your layout:
+4. In your layout
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tiny_mce_if_used %>
     <%= tiny_mce if using_tiny_mce? %>
  
-5. In your controller:
+5. In your controller
  
     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
