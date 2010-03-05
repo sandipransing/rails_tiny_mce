@@ -1,9 +1,9 @@
 ## RailsTinyMCE
- 
+-----------
 This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i have modified and updated this plugin for my project, now this plugin works with jrails(jquery), paperclip plugin.
  
 -Install rails_tiny_mce plugin using
- 
+--------------------- 
     script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
     script/generate rails_tiny_mce_migration
@@ -11,11 +11,11 @@ This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i ha
     rake db:migrate
  
 -Install jrails(jquery) plugin using
-
+----------------
     script/plugin install git://github.com/aaronchi/jrails.git
  
 -Install dependent plugins(if you didnt):
- 
+---------------------
     rake rails_tiny_mce:plugins
  
 Above command will copy *paperclip, responds_to_parent, will_paginate* to your plugin directory
@@ -24,24 +24,26 @@ Above command will copy *paperclip, responds_to_parent, will_paginate* to your p
 **responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
 **will_paginate** git://github.com/mislav/will_paginate.git
  
-4. In your layout
+4. In your layout add following lines
+-----------------------
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tiny_mce_if_used %>
     <%= tiny_mce if using_tiny_mce? %>
  
-5. In your controller
- 
+5. Inside controller class on top add following lines
+-------------------------------------
     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
-This AppConfig.default_mce_options is in config/initializers/tiny_mce_plus_config.rb, you could change the setting there
+This AppConfig.default_mce_options is in *config/initializers/tiny_mce_plus_config.rb*, you could change the setting there
  
-6. In your view
+6. In your view add class mceEditor to text_area
+-----------------------------
 Then append the following to the text area you want to transform into a TinyMCE editor.
  
     :class => "mceEditor"
  
 7. Install file lists
-==================
+-------------------------
  
     rake rails_tiny_mce:install
  
@@ -70,12 +72,12 @@ will Install following files:
 You may custom the config in tiny_mce_plus_config.rb.
  
 ## Attention Note:
-
+---------------------
 * Do not put <p> </p> around the textarea.
 * If you use *old will_paginate plugin*, maybe change the url_for to url_option in remote_link_renderer.rb
  
 ## Example use:
- 
+----------------------
 - Create CRUD for post
     ruby script/generate scaffold post title:string text:description
  
@@ -92,6 +94,7 @@ to
     <%= f.text_area :description, :class => "mceEditor" %>
  
 ## Contributors
+----------------
 
 1. Sandip Ransing, Josh Software Private Limited
 
