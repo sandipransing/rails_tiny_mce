@@ -1,7 +1,8 @@
 # RailsTinyMCE : Rich Text Editor
 -----------
-This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job.
-Plugin works with jrails(jquery), paperclip plugin
+TinyMCE is a javascript rich text editor. It is easy to integrate into blogs, cms, messages and mailers.
+
+Plugin uses jrails(jquery) and paperclip plugin for upload support.
 
 Features
 --------------
@@ -107,9 +108,10 @@ You may custom the config in tiny_mce_plus_config.rb.
 to
     <%= f.text_area :description, :class => "mceEditor" %>
  
-## Contributor
+## Contributors
 
 1. Sandip Ransing, Josh Software Private Limited
+2. ilake
 
 thats, all
 
