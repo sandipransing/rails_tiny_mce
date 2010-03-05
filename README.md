@@ -1,28 +1,28 @@
-## RailsTinyMCE
+# RailsTinyMCE
 -----------
 This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i have modified and updated this plugin for my project, now this plugin works with jrails(jquery), paperclip plugin.
  
--Install rails_tiny_mce plugin using
+1. Install rails_tiny_mce plugin using
 --------------------- 
-    script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
+    ./script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
-    script/generate rails_tiny_mce_migration
+    ./script/generate rails_tiny_mce_migration
     
     rake db:migrate
  
--Install jrails(jquery) plugin using
+2. Install jrails(jquery) plugin using
 ----------------
-    script/plugin install git://github.com/aaronchi/jrails.git
+    ./script/plugin install git://github.com/aaronchi/jrails.git
  
--Install dependent plugins(if you didnt):
+3. Install dependent plugins(if you didnt):
 ---------------------
     rake rails_tiny_mce:plugins
  
-Above command will copy *paperclip, responds_to_parent, will_paginate* to your plugin directory
+Above command will copy *paperclip, responds_to_parent, will_paginate* plugins to vendor/plugins directory.
  
-**paperclip** git://github.com/thoughtbot/paperclip.git
-**responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
-**will_paginate** git://github.com/mislav/will_paginate.git
+- **paperclip** git://github.com/thoughtbot/paperclip.git
+- **responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
+- **will_paginate** git://github.com/mislav/will_paginate.git
  
 4. In your layout add following lines
 -----------------------
@@ -44,7 +44,6 @@ Then append the following to the text area you want to transform into a TinyMCE 
  
 7. Install file lists
 -------------------------
- 
     rake rails_tiny_mce:install
  
 will Install following files:
@@ -79,15 +78,15 @@ You may custom the config in tiny_mce_plus_config.rb.
 ## Example use:
 ----------------------
 - Create CRUD for post
-    ruby script/generate scaffold post title:string text:description
+    ./script/generate scaffold post title:string text:description
  
 - Run Migrations
     rake db:migrate
  
 - Add following line to posts_controller.rb
-     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
+    uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
-- open /views/posts/new.html.erb and /views/posts/edit.html.erb
+- Open /views/posts/new.html.erb and /views/posts/edit.html.erb
 Modifiy following line
     <%= f.text_area :description %>
 to
@@ -95,7 +94,6 @@ to
  
 ## Contributors
 ----------------
-
 1. Sandip Ransing, Josh Software Private Limited
 
 thats, all
