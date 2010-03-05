@@ -1,7 +1,18 @@
-# RailsTinyMCE
+# RailsTinyMCE : Rich Text Editor
 -----------
-This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i have modified and updated this plugin for my project, now this plugin works with jrails(jquery), paperclip plugin.
- 
+This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job.
+Plugin works with jrails(jquery), paperclip plugin
+
+Features
+--------------
+
+- Provides rich text editor 
+- Customisable TinyMCE plugins
+- Easy to integrate
+- Supports Image upload & insert
+- Supports Media upload & Youtube embed 
+- TODO: Document upload plugin
+
 1. Install rails_tiny_mce plugin using
 --------------------- 
     ./script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
@@ -71,7 +82,6 @@ will Install following files:
 You may custom the config in tiny_mce_plus_config.rb.
  
 ## Attention Note:
----------------------
 * Do not put *\<p> \</p>* around the textarea.
 * If you are using *old will_paginate plugin*, change the *url_for* to *url_option* in *remote_link_renderer.rb*
  
