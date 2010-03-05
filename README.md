@@ -14,7 +14,7 @@ This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i ha
 ----------------
     ./script/plugin install git://github.com/aaronchi/jrails.git
  
-3. Install dependent plugins(if you didn''t):
+3. Install dependent plugins(if you didn\'t)
 ---------------------
     rake rails_tiny_mce:plugins
  
@@ -72,8 +72,8 @@ You may custom the config in tiny_mce_plus_config.rb.
  
 ## Attention Note:
 ---------------------
-* Do not put *\<p> </p>* around the textarea.
-* If you are using *old will_paginate plugin*, maybe change the url_for to url_option in *remote_link_renderer.rb*
+* Do not put *\<p> \</p>* around the textarea.
+* If you are using *old will_paginate plugin*, change the *url_for* to *url_option* in *remote_link_renderer.rb*
  
 ## Example use:
 
