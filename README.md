@@ -1,21 +1,22 @@
-## RailsTinyMce
+## RailsTinyMCE
  
 This plugin based on ja_tiny_mce plugin, thanks to ilake for his great job, i have modified and updated this plugin for my project, now this plugin works with jrails(jquery), paperclip plugin.
  
 1. Install rails_tiny_mce plugin using
  
-script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
+    script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
-script/generate rails_tiny_mce_migration
-rake db:migrate
+    script/generate rails_tiny_mce_migration
+    
+    rake db:migrate
  
 2. Install jrails(jquery) plugin using
 
-script/plugin install git://github.com/aaronchi/jrails.git
+    script/plugin install git://github.com/aaronchi/jrails.git
  
 3. Install dependent plugins(if you didn't):
  
-rake rails_tiny_mce:plugins
+    rake rails_tiny_mce:plugins
  
 Above command will copy *paperclip, responds_to_parent, will_paginate* to your plugin directory
  
@@ -24,48 +25,47 @@ Above command will copy *paperclip, responds_to_parent, will_paginate* to your p
 **will_paginate** git://github.com/mislav/will_paginate.git
  
 4. In your layout:
-<%= javascript_include_tag :defaults %>
-<%= javascript_include_tiny_mce_if_used %>
-<%= tiny_mce if using_tiny_mce? %>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tiny_mce_if_used %>
+    <%= tiny_mce if using_tiny_mce? %>
  
 5. In your controller:
  
-uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
+    uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
 This AppConfig.default_mce_options is in config/initializers/tiny_mce_plus_config.rb, you could change the setting there
  
 6. In your view
 Then append the following to the text area you want to transform into a TinyMCE editor.
  
-:class => "mceEditor"
+    :class => "mceEditor"
  
 7. Install file lists
 ==================
  
-rake rails_tiny_mce:install
+    rake rails_tiny_mce:install
  
 will Install following files:
  
-app
-  |-- controller
-    |-- attachments_controller.rb
-  |-- helpers
-    |-- remote_link_renderer.rb
-  |-- models
-    |-- print.rb
-    |-- video.rb
-  |-- views
-    |-- attachments
-       |-- _show_attachment_list.html.erb
-config
-  |-- initializers
-    |-- tiny_mce_plus_config.rb
- 
-public
-  |-- images
-    |-- tiny_mce
-  |-- javascripts
-    |-- tiny_mce
+    app
+      |-- controller
+        |-- attachments_controller.rb
+      |-- helpers
+        |-- remote_link_renderer.rb
+      |-- models
+        |-- print.rb
+        |-- video.rb
+      |-- views
+        |-- attachments
+           |-- _show_attachment_list.html.erb
+    config
+      |-- initializers
+        |-- tiny_mce_plus_config.rb
+    public
+      |-- images
+        |-- tiny_mce
+      |-- javascripts
+        |-- tiny_mce
  
 You may custom the config in tiny_mce_plus_config.rb.
  
@@ -76,20 +76,25 @@ You may custom the config in tiny_mce_plus_config.rb.
  
 ## Example use:
  
-1. Create CRUD for post
- ruby script/generate scaffold post title:string text:description
+- Create CRUD for post
+    ruby script/generate scaffold post title:string text:description
  
-2. rake db:migrate
+- Run Migrations
+    rake db:migrate
  
-3. Add following line to posts_controller.rb
- uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
+- Add following line to posts_controller.rb
+     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
-4. open /views/posts/new.html.erb and /views/posts/edit.html.erb
+- open /views/posts/new.html.erb and /views/posts/edit.html.erb
 Modifiy following line
-<%= f.text_area :description %>
+    <%= f.text_area :description %>
 to
-<%= f.text_area :description, :class => "mceEditor" %>
+    <%= f.text_area :description, :class => "mceEditor" %>
  
+## Contributors
+
+1. Sandip Ransing, Josh Software Private Limited
+
 thats, all
 
-any sugestions? san2821 at gmail.com, sandip at joshsoftware.com released under the MIT license
+any sugestions? **san2821 at gmail.com**, **sandip at joshsoftware.com** released under the MIT license
