@@ -2,7 +2,7 @@ class AttachmentsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
 
   def manage
-    @attachments = "#{params[:media]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
+    @attachments = "tiny_#{params[:media]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
     render :update do |page|
       page.replace_html :dynamic_images_list, :partial => 'show_attachment_list'
     end
@@ -11,7 +11,7 @@ class AttachmentsController < ApplicationController
 
 
   def create
-    @attachment = "#{params[:media]}".classify.constantize.new(params[params[:media]])
+    @attachment = "tiny_#{params[:media]}".classify.constantize.new params[params[:media]]
     
     if @attachment.save
       GC.start
