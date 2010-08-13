@@ -108,6 +108,17 @@ You may custom the config in tiny_mce_plus_config.rb.
 to
     <%= f.text_area :description, :class => "mceEditor" %>
  
+## FAQ
+1. How to get image from post body 
+
+    => Add imagepath method in post model
+    def imagepath
+      match = body.match(/img src="(.+)" border/)
+      $1 if match
+    end
+
+And use *post.imagepath* to get url of image embeded in post content
+
 ## Contributors
 
 1. Sandip Ransing, Josh Software Private Limited
@@ -116,3 +127,4 @@ to
 thats, all
 
 any sugestions? **san2821 at gmail.com** or **sandip at joshsoftware.com** released under the MIT license
+
