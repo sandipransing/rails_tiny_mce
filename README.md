@@ -111,7 +111,7 @@ to
 ## FAQ
 1. How to get image from post body 
 
-    => Add imagepath method in post model
+    #Add imagepath method in post model
     def imagepath
       match = body.match(/img src="(.+)" border/)
       $1 if match
