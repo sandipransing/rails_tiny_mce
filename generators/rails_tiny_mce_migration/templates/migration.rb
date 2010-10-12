@@ -1,6 +1,6 @@
 class CreateTinyMceMedia < ActiveRecord::Migration
   def self.up
-    create_table :prints do |t|
+    create_table :tiny_prints do |t|
 	#(Includes the file with image content)
          t.string    :image_file_name          #Uploading file/image
          t.string    :image_file_size
@@ -8,7 +8,7 @@ class CreateTinyMceMedia < ActiveRecord::Migration
          t.timestamps
     end
   
-    create_table :videos do |t|
+    create_table :tiny_videos do |t|
 	#(Includes the file with original content)
          t.string    :original_file_name          #Uploading file/image
          t.string    :original_file_size
@@ -18,7 +18,7 @@ class CreateTinyMceMedia < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :prints
-    drop_table :videos
+    drop_table :tiny_prints
+    drop_table :tiny_videos
   end
 end
