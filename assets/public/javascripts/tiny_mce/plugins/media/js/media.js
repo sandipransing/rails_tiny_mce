@@ -70,9 +70,7 @@ function ce(tag, name) {
 }
 
 function upload_media_path() {
-  //alert("You are in upload_media_path()");
-  to_path = "/attachments/create?media=video";
-  //to_path = baseURL + "/simple_cms_media/create";
+  to_path = "/attachments?media=video";
   return to_path;
 }
 

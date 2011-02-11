@@ -54,7 +54,7 @@ function ts_onload(){
 }
 function ts_upload_image_path() {
   path=window.parent.location.pathname.split('/')
-  return "/attachments/create?media=print";
+  return "/attachments?media=print";
 }
 function ts_ce(tag,name){
     if (name && window.ActiveXObject){
