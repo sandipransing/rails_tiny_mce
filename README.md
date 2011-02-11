@@ -1,4 +1,4 @@
-# RailsTinyMCE - A Rich Text Editor for ruby on rails
+# RailsTinyMCE - A Rich Text Editor for ruby on rails VERSION 3
 
 TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.
 
@@ -16,15 +16,15 @@ Features
 
 1. Install rails_tiny_mce plugin using
 --------------------- 
-    ./script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
+    rails plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
-    ./script/generate rails_tiny_mce_migration
+    rails g rails_tiny_mce_migration
     
     rake db:migrate
  
 2. Install jrails(jquery) plugin using
 ----------------
-    ./script/plugin install git://github.com/aaronchi/jrails.git
+    rails plugin install git://github.com/aaronchi/jrails.git
  
 3. Install dependent plugins(if you didn\'t)
 ---------------------
@@ -90,7 +90,7 @@ You may custom the config in tiny_mce_plus_config.rb.
 
 - Create CRUD for post
     
-    ./script/generate scaffold post title:string text:description
+    rails g scaffold post title:string text:description
  
 - Run Migrations
     
@@ -100,7 +100,7 @@ You may custom the config in tiny_mce_plus_config.rb.
     
     uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
  
-- Open */views/posts/new.html.erb* and */views/posts/edit.html.erb*
+- Open */views/posts/_form.html.erb* 
 
 - Modifiy following line
     
@@ -126,5 +126,5 @@ And use *post.imagepath* to get url of image embeded in post content
 
 thats, all
 
-any sugestions? **san2821 at gmail.com** or **sandip at joshsoftware.com** released under the MIT license
+any sugestions? **sandip at funonrails.com** or **sandip at joshsoftware.com** released under the MIT license
 
