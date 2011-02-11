@@ -8,13 +8,18 @@ module Paperclip
     def content_type
       type = (self.path.match(/\.(\w+)$/)[1] rescue "octet-stream").downcase
       case type
-      when %r"jpe?g"                 then "image/jpeg"
+      when %r"jp(e|g|eg)"            then "image/jpeg"
       when %r"tiff?"                 then "image/tiff"
       when %r"png", "gif", "bmp"     then "image/#{type}"
       when "txt"                     then "text/plain"
       when %r"html?"                 then "text/html"
-      when "csv", "xml", "css", "js" then "text/#{type}"
-      else "application/x-#{type}"
+      when "js"                      then "application/js"
+      when "csv", "xml", "css"       then "text/#{type}"
+      else
+        # On BSDs, `file` doesn't give a result code of 1 if the file doesn't exist.
+        content_type = (Paperclip.run("file", "-b --mime-type :file", :file => self.path).split(':').last.strip rescue "application/x-#{type}")
+        content_type = "application/x-#{type}" if content_type.match(/\(.*?\)/)
+        content_type
       end
     end
 
@@ -32,12 +37,15 @@ end
 
 if defined? StringIO
   class StringIO
-    attr_accessor :original_filename, :content_type
+    attr_accessor :original_filename, :content_type, :fingerprint
     def original_filename
       @original_filename ||= "stringio.txt"
     end
     def content_type
       @content_type ||= "text/plain"
+    end
+    def fingerprint
+      @fingerprint ||= Digest::MD5.hexdigest(self.string)
     end
   end
 end
@@ -45,4 +53,3 @@ end
 class File #:nodoc:
   include Paperclip::Upfile
 end
-

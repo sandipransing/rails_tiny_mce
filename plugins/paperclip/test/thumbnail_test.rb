@@ -1,10 +1,10 @@
-require 'test/helper'
+require './test/helper'
 
 class ThumbnailTest < Test::Unit::TestCase
 
   context "A Paperclip Tempfile" do
     setup do
-      @tempfile = Paperclip::Tempfile.new("file.jpg")
+      @tempfile = Paperclip::Tempfile.new(["file", ".jpg"])
     end
 
     should "have its path contain a real extension" do
@@ -47,7 +47,7 @@ class ThumbnailTest < Test::Unit::TestCase
         end
 
         should "start with dimensions of 434x66" do
-          cmd = %Q[identify -format "%wx%h" "#{@file.path}"] 
+          cmd = %Q[identify -format "%wx%h" "#{@file.path}"]
           assert_equal "434x66", `#{cmd}`.chomp
         end
 
@@ -61,7 +61,7 @@ class ThumbnailTest < Test::Unit::TestCase
           end
 
           should "be the size we expect it to be" do
-            cmd = %Q[identify -format "%wx%h" "#{@thumb_result.path}"] 
+            cmd = %Q[identify -format "%wx%h" "#{@thumb_result.path}"]
             assert_equal args[1], `#{cmd}`.chomp
           end
         end
@@ -85,14 +85,14 @@ class ThumbnailTest < Test::Unit::TestCase
       should "have whiny turned on by default" do
         assert @thumb.whiny
       end
-      
+
       should "have convert_options set to nil by default" do
         assert_equal nil, @thumb.convert_options
       end
 
       should "send the right command to convert when sent #make" do
-        Paperclip.expects(:"`").with do |arg|
-          arg.match %r{convert\s+"#{File.expand_path(@thumb.file.path)}\[0\]"\s+-resize\s+\"x50\"\s+-crop\s+\"100x50\+114\+0\"\s+\+repage\s+".*?"}
+        Paperclip::CommandLine.expects(:"`").with do |arg|
+          arg.match %r{convert ["']#{File.expand_path(@thumb.file.path)}\[0\]["'] -resize ["']x50["'] -crop ["']100x50\+114\+0["'] \+repage ["'].*?["']}
         end
         @thumb.make
       end
@@ -102,7 +102,7 @@ class ThumbnailTest < Test::Unit::TestCase
         assert_match /100x50/, `identify "#{dst.path}"`
       end
     end
-    
+
     context "being thumbnailed with source file options set" do
       setup do
         @thumb = Paperclip::Thumbnail.new(@file,
@@ -111,12 +111,12 @@ class ThumbnailTest < Test::Unit::TestCase
       end
 
       should "have source_file_options value set" do
-        assert_equal "-strip", @thumb.source_file_options
+        assert_equal ["-strip"], @thumb.source_file_options
       end
 
       should "send the right command to convert when sent #make" do
-        Paperclip.expects(:"`").with do |arg|
-          arg.match %r{convert\s+-strip\s+"#{File.expand_path(@thumb.file.path)}\[0\]"\s+-resize\s+"x50"\s+-crop\s+"100x50\+114\+0"\s+\+repage\s+".*?"}
+        Paperclip::CommandLine.expects(:"`").with do |arg|
+          arg.match %r{convert -strip ["']#{File.expand_path(@thumb.file.path)}\[0\]["'] -resize ["']x50["'] -crop ["']100x50\+114\+0["'] \+repage ["'].*?["']}
         end
         @thumb.make
       end
@@ -125,7 +125,7 @@ class ThumbnailTest < Test::Unit::TestCase
         dst = @thumb.make
         assert_match /100x50/, `identify "#{dst.path}"`
       end
-      
+
       context "redefined to have bad source_file_options setting" do
         setup do
           @thumb = Paperclip::Thumbnail.new(@file,
@@ -138,7 +138,7 @@ class ThumbnailTest < Test::Unit::TestCase
             @thumb.make
           end
         end
-      end      
+      end
     end
 
     context "being thumbnailed with convert options set" do
@@ -149,12 +149,12 @@ class ThumbnailTest < Test::Unit::TestCase
       end
 
       should "have convert_options value set" do
-        assert_equal "-strip -depth 8", @thumb.convert_options
+        assert_equal %w"-strip -depth 8", @thumb.convert_options
       end
 
       should "send the right command to convert when sent #make" do
-        Paperclip.expects(:"`").with do |arg|
-          arg.match %r{convert\s+"#{File.expand_path(@thumb.file.path)}\[0\]"\s+-resize\s+"x50"\s+-crop\s+"100x50\+114\+0"\s+\+repage\s+-strip\s+-depth\s+8\s+".*?"}
+        Paperclip::CommandLine.expects(:"`").with do |arg|
+          arg.match %r{convert ["']#{File.expand_path(@thumb.file.path)}\[0\]["'] -resize ["']x50["'] -crop ["']100x50\+114\+0["'] \+repage -strip -depth 8 ["'].*?["']}
         end
         @thumb.make
       end
@@ -163,7 +163,7 @@ class ThumbnailTest < Test::Unit::TestCase
         dst = @thumb.make
         assert_match /100x50/, `identify "#{dst.path}"`
       end
-      
+
       context "redefined to have bad convert_options setting" do
         setup do
           @thumb = Paperclip::Thumbnail.new(@file,
@@ -176,18 +176,18 @@ class ThumbnailTest < Test::Unit::TestCase
             @thumb.make
           end
         end
-      end      
+      end
     end
-    
+
     context "being thumbnailed with a blank geometry string" do
       setup do
         @thumb = Paperclip::Thumbnail.new(@file,
                                           :geometry        => "",
                                           :convert_options => "-gravity center -crop \"300x300+0-0\"")
       end
-      
+
       should "not get resized by default" do
-        assert_no_match(/-resize/, @thumb.transformation_command)
+        assert !@thumb.transformation_command.include?("-resize")
       end
     end
   end
@@ -200,7 +200,7 @@ class ThumbnailTest < Test::Unit::TestCase
     teardown { @file.close }
 
     should "start with two pages with dimensions 612x792" do
-      cmd = %Q[identify -format "%wx%h" "#{@file.path}"] 
+      cmd = %Q[identify -format "%wx%h" "#{@file.path}"]
       assert_equal "612x792"*2, `#{cmd}`.chomp
     end
 

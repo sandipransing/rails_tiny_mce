@@ -1,10 +1,33 @@
-require 'test/helper'
+require './test/helper'
 require 'aws/s3'
 
 class StorageTest < Test::Unit::TestCase
   def rails_env(env)
     silence_warnings do
-      Object.const_set(:RAILS_ENV, env)
+      Object.const_set(:Rails, stub('Rails', :env => env))
+    end
+  end
+  
+  context "filesystem" do
+    setup do
+      rebuild_model :styles => { :thumbnail => "25x25#" }
+      @dummy = Dummy.create!
+
+      @dummy.avatar = File.open(File.join(File.dirname(__FILE__), "fixtures", "5k.png"))
+    end
+    
+    should "allow file assignment" do
+      assert @dummy.save
+    end
+    
+    should "store the original" do
+      @dummy.save
+      assert File.exists?(@dummy.avatar.path)
+    end
+    
+    should "store the thumbnail" do
+      @dummy.save
+      assert File.exists?(@dummy.avatar.path(:thumbnail))
     end
   end
 
@@ -17,12 +40,6 @@ class StorageTest < Test::Unit::TestCase
 
       @dummy = Dummy.new
       @avatar = @dummy.avatar
-
-      @current_env = RAILS_ENV
-    end
-
-    teardown do
-      rails_env(@current_env)
     end
 
     should "get the correct credentials when RAILS_ENV is production" do
@@ -97,6 +114,33 @@ class StorageTest < Test::Unit::TestCase
     end
   end
 
+  context "Generating a url with an expiration" do
+    setup do
+      AWS::S3::Base.stubs(:establish_connection!)
+      rebuild_model :storage => :s3,
+                    :s3_credentials => {
+                      :production   => { :bucket => "prod_bucket" },
+                      :development  => { :bucket => "dev_bucket" }
+                    },
+                    :s3_host_alias => "something.something.com",
+                    :path => ":attachment/:basename.:extension",
+                    :url => ":s3_alias_url"
+
+      rails_env("production")
+
+      @dummy = Dummy.new
+      @dummy.avatar = StringIO.new(".")
+
+      AWS::S3::S3Object.expects(:url_for).with("avatars/stringio.txt", "prod_bucket", { :expires_in => 3600 })
+
+      @dummy.avatar.expiring_url
+    end
+
+    should "should succeed" do
+      assert true
+    end
+  end
+
   context "Parsing S3 credentials with a bucket in them" do
     setup do
       AWS::S3::Base.stubs(:establish_connection!)
@@ -106,10 +150,7 @@ class StorageTest < Test::Unit::TestCase
                       :development  => { :bucket => "dev_bucket" }
                     }
       @dummy = Dummy.new
-      @old_env = RAILS_ENV
     end
-
-    teardown{ rails_env(@old_env) }
 
     should "get the right bucket in production" do
       rails_env("production")
@@ -166,7 +207,22 @@ class StorageTest < Test::Unit::TestCase
           assert true
         end
       end
-      
+
+      context "and saved without a bucket" do
+        setup do
+          class AWS::S3::NoSuchBucket < AWS::S3::ResponseError
+            # Force the class to be created as a proper subclass of ResponseError thanks to AWS::S3's autocreation of exceptions
+          end
+          AWS::S3::Bucket.expects(:create).with("testing")
+          AWS::S3::S3Object.stubs(:store).raises(AWS::S3::NoSuchBucket.new(:message, :response)).then.returns(true)
+          @dummy.save
+        end
+
+        should "succeed" do
+          assert true
+        end
+      end
+
       context "and remove" do
         setup do
           AWS::S3::S3Object.stubs(:exists?).returns(true)
@@ -180,7 +236,7 @@ class StorageTest < Test::Unit::TestCase
       end
     end
   end
-  
+
   context "An attachment with S3 storage and bucket defined as a Proc" do
     setup do
       AWS::S3::Base.stubs(:establish_connection!)
@@ -188,7 +244,7 @@ class StorageTest < Test::Unit::TestCase
                     :bucket => lambda { |attachment| "bucket_#{attachment.instance.other}" },
                     :s3_credentials => {:not => :important}
     end
-    
+
     should "get the right bucket name" do
       assert "bucket_a", Dummy.new(:other => 'a').avatar.bucket_name
       assert "bucket_b", Dummy.new(:other => 'b').avatar.bucket_name
@@ -234,6 +290,28 @@ class StorageTest < Test::Unit::TestCase
         end
       end
     end
+  end
+
+  context "with S3 credentials supplied as Pathname" do
+     setup do
+       ENV['S3_KEY']    = 'pathname_key'
+       ENV['S3_BUCKET'] = 'pathname_bucket'
+       ENV['S3_SECRET'] = 'pathname_secret'
+
+       rails_env('test')
+
+       rebuild_model :storage        => :s3,
+                     :s3_credentials => Pathname.new(File.join(File.dirname(__FILE__))).join("fixtures/s3.yml")
+
+       Dummy.delete_all
+       @dummy = Dummy.new
+     end
+
+     should "parse the credentials" do
+       assert_equal 'pathname_bucket', @dummy.avatar.bucket_name
+       assert_equal 'pathname_key', AWS::S3::Base.connection.options[:access_key_id]
+       assert_equal 'pathname_secret', AWS::S3::Base.connection.options[:secret_access_key]
+     end
   end
 
   context "with S3 credentials in a YAML file" do
@@ -285,7 +363,7 @@ class StorageTest < Test::Unit::TestCase
         teardown { @file.close }
 
         should "still return a Tempfile when sent #to_file" do
-          assert_equal Tempfile, @dummy.avatar.to_file.class
+          assert_equal Paperclip::Tempfile, @dummy.avatar.to_file.class
         end
 
         context "and saved" do
@@ -295,6 +373,11 @@ class StorageTest < Test::Unit::TestCase
 
           should "be on S3" do
             assert true
+          end
+
+          should "generate a tempfile with the right name" do
+            file = @dummy.avatar.to_file
+            assert_match /^original.*\.png$/, File.basename(file.path)
           end
         end
       end
