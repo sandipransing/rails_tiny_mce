@@ -18,7 +18,7 @@ Features
 --------------------- 
     rails plugin install git://github.com/sandipransing/rails_tiny_mce.git
  
-    rails g rails_tiny_mce_migration
+    rails g tiny_migration
     
     rake db:migrate
  
