@@ -1,8 +1,8 @@
 module ApplicationConfiguration
   require 'ostruct'
   require 'yaml'  
-  if File.exists?( File.join(RAILS_ROOT, 'config', 'application.yml') )
-    file = File.join(RAILS_ROOT, 'config', 'application.yml')
+  if File.exists?( File.join(Rails.root, 'config', 'application.yml') )
+    file = File.join(Rails.root, 'config', 'application.yml')
     users_app_config = YAML.load_file file
   end
   
