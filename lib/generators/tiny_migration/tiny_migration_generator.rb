@@ -1,4 +1,4 @@
-class TinyMigrationGenerator < Rails::Generator::Base 
+class TinyMigrationGenerator < Rails::Generators::Base 
   require 'rails/generators'
   require 'rails/generators/migration'     
 
