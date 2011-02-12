@@ -1,4 +1,4 @@
-# RailsTinyMCE - A Rich Text Editor for ruby on rails VERSION 3
+# RailsTinyMCE - A Rich Text Editor for rails 3
 
 TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.
 
@@ -7,7 +7,7 @@ Plugin uses jrails(jquery) and paperclip plugin for upload support.
 Features
 --------------
 
-- Provides rich text editor 
+- Provides rich text editor
 - Customisable TinyMCE plugins
 - Easy to integrate
 - Supports Image upload & insert
@@ -26,15 +26,15 @@ Features
 ----------------
     rails plugin install git://github.com/aaronchi/jrails.git
  
-3. Install dependent plugins(if you didn\'t)
+3. Install dependent plugins(if you did not already)
 ---------------------
     rake rails_tiny_mce:plugins
  
 Above command will copy *paperclip, responds_to_parent, will_paginate* plugins to vendor/plugins directory.
  
-- **paperclip** git://github.com/thoughtbot/paperclip.git
-- **responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
-- **will_paginate** git://github.com/mislav/will_paginate.git
+    - **paperclip** git://github.com/thoughtbot/paperclip.git
+    - **responds_to_parent** http://responds-to-parent.googlecode.com/svn/trunk
+    - **will_paginate** git://github.com/mislav/will_paginate.git
  
 4. In your layout add following lines
 -----------------------
@@ -52,7 +52,7 @@ This AppConfig.default_mce_options is in *config/initializers/tiny_mce_plus_conf
 -----------------------------
 Then append the following to the text area you want to transform into a TinyMCE editor.
  
-    :class => "mceEditor"
+    :class => :mceEditor
  
 7. Install file lists
 -------------------------
@@ -106,7 +106,7 @@ You may custom the config in tiny_mce_plus_config.rb.
     
     <%= f.text_area :description %>
 to
-    <%= f.text_area :description, :class => "mceEditor" %>
+    <%= f.text_area :description, :class => :mceEditor %>
  
 ## FAQ
 1. How to get image from post body 
