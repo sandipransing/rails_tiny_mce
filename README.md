@@ -33,9 +33,9 @@ Features
  
 Above command will copy `paperclip`, `respond_to_parent`, `will_paginate` plugins to vendor/plugins directory.
  
-    - paperclip `git://github.com/thoughtbot/paperclip.git`
-    - respond_to_parent `git://github.com/itkin/respond_to_parent.git`
-    - will_paginate `git://github.com/mislav/will_paginate.git`
+- paperclip `git://github.com/thoughtbot/paperclip.git`
+- respond_to_parent `git://github.com/itkin/respond_to_parent.git`
+- will_paginate `git://github.com/mislav/will_paginate.git`
  
 4. In your layout add following lines
 --------------------- 
