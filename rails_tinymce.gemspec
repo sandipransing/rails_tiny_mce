@@ -13,6 +13,9 @@ Gem::Specification.new do |s|
   s.description = %q{Supports Images and media upload, Easy to integrate with blogs, CMS, messages & mailers, newsletters}
 
   s.rubyforge_project = "rails_tinymce"
+  s.add_dependency 'paperclip'
+  s.add_dependency 'jrails'
+  s.add_dependency 'will_paginate'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
