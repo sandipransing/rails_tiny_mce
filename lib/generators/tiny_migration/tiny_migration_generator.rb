@@ -15,6 +15,6 @@ class TinyMigrationGenerator < Rails::Generators::Base
   end
 
   def create_migration_file
-    migration_template 'migration.rb', 'db/migrate/create_tiny_media.rb'
+    migration_template 'migration.rb', 'db/migrate/create_tiny_mce_media.rb'
   end
 end
