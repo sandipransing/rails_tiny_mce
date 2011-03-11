@@ -16,15 +16,16 @@ Features
 
 1. Install rails_tiny_mce plugin using
 --------------------- 
-    ./script/plugin install git://github.com/sandipransing/rails_tiny_mce.git
+    ruby script/plugin install git@github.com:sandipransing/rails_tiny_mce.git -r rails_2.x
+
  
-    ./script/generate rails_tiny_mce_migration
+    ruby script/generate rails_tiny_mce_migration
     
     rake db:migrate
  
 2. Install jrails(jquery) plugin using
 ----------------
-    ./script/plugin install git://github.com/aaronchi/jrails.git
+    ruby script/plugin install git://github.com/aaronchi/jrails.git
  
 3. Install dependent plugins(if you didn\'t)
 ---------------------
