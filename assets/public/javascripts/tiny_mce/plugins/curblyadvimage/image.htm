@@ -43,7 +43,7 @@
           <fieldset>
 	    <legend>Available Images</legend>
             <script type="text/javascript">//<![CDATA[
-                $.ajax({type: "GET", url: "/attachments/manage?media=print", dataType: "script"});
+                $.ajax({type: "GET", url: tinyMCE.settings.plugin_media_handler_url+ "?media=print", dataType: "script"});
                 //]]></script>
 
             <div id="dynamic_images_list">

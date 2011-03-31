@@ -24,7 +24,7 @@ function select_thumb(element) {
 
 function upload_callback(){
     //$('#dynamic_images_list').html('');
-    $.ajax({type: "GET", url: "/attachments/manage?media=print&page=1", dataType: "script"});
+    $.ajax({type: "GET", url: tinyMCE.settings.plugin_media_handler_url+"?media=print&page=1", dataType: "script"});
 }
 
 function curbly_insert_image(url, alt_text){

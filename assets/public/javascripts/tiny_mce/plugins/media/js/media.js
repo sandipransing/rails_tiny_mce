@@ -21,7 +21,7 @@ function select_thumb(element) {
 
 function upload_callback(channel){
     //$('#dynamic_images_list').html('');
-    $.ajax({type: "GET", url: "/attachments/manage?media=video&page=1", dataType: "script"});
+    $.ajax({type: "GET", url: tinyMCE.settings.plugin_media_handler_url+"?media=video&page=1", dataType: "script"});
 }
 
 function insert_attachment(path){

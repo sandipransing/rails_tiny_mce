@@ -29,7 +29,7 @@ AppConfig.advanced_mce_options = {
     :plugins => %w{media preview curblyadvimage inlinepopups safari paste},
     :plugin_preview_pageurl => '../../../../../posts/preview',
     :plugin_preview_width => "950",
-    :plugin_preview_height => "650",
+    :plugin_preview_height => "650",    
     :editor_selector => "mceEditor",
     :extended_valid_elements => "img[class|src|flashvars|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|obj|param|embed|scale|wmode|salign|style],embed[src|quality|scale|salign|wmode|bgcolor|width|height|name|align|type|pluginspage|flashvars],object[align<bottom?left?middle?right?top|archive|border|class|classid|codebase|codetype|data|declare|dir<ltr?rtl|height|hspace|id|lang|name|style|tabindex|title|type|usemap|vspace|width]"
   }
@@ -55,6 +55,7 @@ AppConfig.default_mce_options = {
   :plugin_preview_pageurl => '../../../../../posts/preview',
   :plugin_preview_width => "950",
   :plugin_preview_height => "650",
+  :plugin_media_handler_url => '/attachments/manage',
   :editor_selector => "mceEditor",
   :extended_valid_elements => "img[class|src|flashvars|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|obj|param|embed|scale|wmode|salign|style],embed[src|quality|scale|salign|wmode|bgcolor|width|height|name|align|type|pluginspage|flashvars],object[align<bottom?left?middle?right?top|archive|border|class|classid|codebase|codetype|data|declare|dir<ltr?rtl|height|hspace|id|lang|name|style|tabindex|title|type|usemap|vspace|width]"  
   }
