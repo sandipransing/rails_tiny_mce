@@ -85,7 +85,11 @@ You may custom the config in tiny_mce_plus_config.rb.
 ## Attention Note:
 * Do not put `\<p> \</p>` around the textarea.
 * If you are using `old will_paginate plugin`, change the *url_for* to *url_option* in *remote_link_renderer.rb*
- 
+* If you are using <pre>gem "will_paginate", "~> 3.0.pre2"</pre> you need changes in app/helpers/remote_link_renderer.rb
+    class RemoteLinkRenderer < WillPaginate::LinkRenderer
+to
+    class RemoteLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer 
+
 ## Example use:
 
 - Create CRUD for post
