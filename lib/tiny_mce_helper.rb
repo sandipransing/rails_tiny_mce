@@ -39,7 +39,7 @@ module TinyMCEHelper
   alias tiny_mce tiny_mce_init
   
   def javascript_include_tiny_mce
-    javascript_include_tag RAILS_ENV == 'development' ? "tiny_mce/tiny_mce_src" : "tiny_mce/tiny_mce"
+    javascript_include_tag Rails.env == 'development' ? "tiny_mce/tiny_mce_src" : "tiny_mce/tiny_mce"
   end
   
   def javascript_include_tiny_mce_if_used
