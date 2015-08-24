@@ -1,3 +1,3 @@
 module RailsTinymce
-  VERSION = "1.0"
+  VERSION = "4.0"
 end

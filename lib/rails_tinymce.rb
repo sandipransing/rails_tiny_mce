@@ -1,3 +1,2 @@
-module RailsTinymce
-  # Your code goes here...
-end
+require "rails_tinymce/version"
+require "tinymce"
